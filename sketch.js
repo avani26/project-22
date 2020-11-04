@@ -11,6 +11,8 @@ function preload()
 	packageIMG=loadImage("package.png")
 }
 
+
+
 function setup() {
 	createCanvas(800, 700);
 	rectMode(CENTER);
@@ -31,10 +33,11 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
-	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.5, isStatic:false});
-	World.add(world, packageBody);
+	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.5,isStatic:true});
+	//World.add(world, packageBody);
 	
-
+	
+     
 	//Create a Ground
 	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
  	World.add(world, ground);
@@ -43,6 +46,13 @@ function setup() {
 	Engine.run(engine);
   
 }
+function keyPressed() {
+	if (keyCode === UP_ARROW) {
+		packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:-0.5, isStatic:false});
+		World.add(world, packageBody);
+		//packageSprite.y= packageBody.position.y+450;
+	  }
+   }
 
 
 function draw() {
@@ -56,12 +66,7 @@ function draw() {
  
 }
 
-function keyPressed() {
- if (keyCode === DOWN_ARROW) {
-	packageSprite.x= width/2;
-	packageSprite.y=640;
-  }
-}
+
 
 
 
